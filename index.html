@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Willa Chinese AI — Speak Real Chinese, Not Perfect Chinese</title>
+<meta name="description" content="An AI Chinese tutor designed by a former Harvard Chinese instructor. Built on a simple thesis: fluency comes from conversation, not grammar drills. Join the waitlist." />
+
+<meta property="og:title" content="Willa Chinese AI — Speak Real Chinese, Not Perfect Chinese" />
+<meta property="og:description" content="Built by a former Harvard Chinese instructor. Fluency comes from conversation, not grammar drills." />
+<meta property="og:url" content="https://willachinese.com" />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #2a2520;
+  --ink-soft: #4a423a;
+  --ink-faded: #8a7f73;
+  --paper: #fbf6ec;
+  --paper-warm: #f3e9d6;
+  --paper-aged: #ede1c8;
+  --accent: #b54232;
+  --accent-deep: #8a2419;
+  --gold: #b89968;
+  --rule-line: rgba(42, 37, 32, 0.15);
+  --margin-line: rgba(181, 66, 50, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(184, 153, 104, 0.06) 0%, transparent 60%),
+    radial-gradient(circle at 85% 80%, rgba(181, 66, 50, 0.04) 0%, transparent 60%),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      rgba(42, 37, 32, 0.04) 31px,
+      rgba(42, 37, 32, 0.04) 32px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 80px;
+  width: 1px;
+  background: var(--margin-line);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.zh { font-family: 'Noto Serif SC', 'Songti SC', serif; }
+
+/* ─── NAVIGATION ─────────────────────────────────────── */
+nav {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 60px 28px 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.logo-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-bottom: 3px;
+}
+
+.logo-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-faded);
+  margin-left: 2px;
+  letter-spacing: 0;
+}
+
+.lang-toggle {
+  display: flex;
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 3px;
+  background: var(--paper);
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-faded);
+  cursor: pointer;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  font-family: 'Lora', serif;
+}
+
+.lang-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+.hero {
+  position: relative;
+  z-index: 5;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 60px 80px 120px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 70px;
+  align-items: center;
+}
+
+.hero-content { position: relative; }
+
+.eyebrow {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(44px, 5.5vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.1s forwards;
+}
+
+h1 em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.025em;
+  display: inline-block;
+}
+
+.hero-lede {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+  max-width: 540px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.3s forwards;
+}
+
+/* ─── EMAIL FORM ─────────────────────────────────────── */
+.waitlist-form {
+  max-width: 520px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+}
+
+.form-row {
+  display: flex;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.form-row:focus-within {
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+.form-row input {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+}
+
+.form-row input::placeholder {
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+.form-row button {
+  padding: 16px 28px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.form-row button:hover { background: var(--accent); }
+
+.form-note {
+  margin-top: 14px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-faded);
+}
+
+.form-success {
+  display: none;
+  padding: 22px 26px;
+  background: var(--paper-warm);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+.form-success.show { display: block; animation: fadeUp 0.4s ease forwards; }
+
+/* ─── PORTRAIT CARD ──────────────────────────────────── */
+.portrait-card {
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.5s forwards;
+}
+
+.portrait-frame {
+  position: relative;
+  background: var(--paper-warm);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  box-shadow:
+    0 1px 2px rgba(42, 37, 32, 0.06),
+    0 14px 36px rgba(42, 37, 32, 0.12),
+    0 4px 8px rgba(42, 37, 32, 0.05);
+  transform: rotate(2deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 8px solid var(--paper);
+}
+
+.portrait-frame:hover { transform: rotate(0); }
+
+.portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-aged) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-placeholder::before {
+  content: '老師';
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  font-size: 100px;
+  color: rgba(42, 37, 32, 0.2);
+  letter-spacing: 0.1em;
+}
+
+.portrait-stamp {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 96px;
+  height: 96px;
+  background: var(--accent);
+  color: var(--paper);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-12deg);
+  box-shadow: 0 6px 16px rgba(181, 66, 50, 0.3);
+  text-align: center;
+  line-height: 1.2;
+  z-index: 2;
+}
+
+.portrait-stamp .zh-stamp {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 3px;
+  letter-spacing: 0.05em;
+}
+
+.portrait-stamp .est {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.portrait-caption {
+  margin-top: 24px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-soft);
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.portrait-caption .arrow {
+  display: inline-block;
+  margin-right: 4px;
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* ─── MANIFESTO SECTION ──────────────────────────────── */
+.manifesto {
+  position: relative;
+  z-index: 5;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 60px 80px 120px;
+  border-top: 1px solid var(--rule-line);
+}
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.manifesto-label {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-faded);
+  position: sticky;
+  top: 40px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.manifesto-label::before {
+  content: '§';
+  display: block;
+  font-family: 'Lora', serif;
+  font-size: 32px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.manifesto-text {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.manifesto-text strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.manifesto-text .pop {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.manifesto-text + .manifesto-text { margin-top: 28px; }
+
+.manifesto-signature {
+  margin-top: 44px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.manifesto-signature-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-faded);
+  margin-top: 6px;
+  letter-spacing: 0.04em;
+}
+
+/* ─── CREDENTIALS STRIP ──────────────────────────────── */
+.credentials {
+  position: relative;
+  z-index: 5;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 60px 50px 120px;
+  border-top: 1px solid var(--rule-line);
+  border-bottom: 1px solid var(--rule-line);
+}
+
+.cred-label {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-faded);
+  margin-bottom: 28px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.cred-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px 56px;
+  align-items: flex-start;
+}
+
+.cred-item {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.cred-item .cred-detail {
+  display: block;
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-faded);
+  margin-top: 4px;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 5;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 60px 48px 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.foot-left {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-faded);
+  letter-spacing: 0.02em;
+}
+
+.foot-right {
+  display: flex;
+  gap: 24px;
+}
+
+.foot-right a {
+  color: var(--ink-faded);
+  text-decoration: none;
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-style: italic;
+  transition: color 0.2s ease;
+}
+
+.foot-right a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 980px) {
+  body::after { display: none; }
+  nav { padding: 20px 24px; }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 32px 24px 64px;
+  }
+  .portrait-card { max-width: 300px; margin: 0 auto; }
+  .manifesto { padding: 56px 24px; }
+  .manifesto-grid { grid-template-columns: 1fr; gap: 20px; }
+  .manifesto-label { position: static; }
+  .manifesto-text { font-size: 19px; }
+  .credentials { padding: 40px 24px; }
+  footer { padding: 32px 24px 48px; flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 560px) {
+  h1 { font-size: 42px; }
+  .hero-lede { font-size: 17px; }
+  .form-row { flex-direction: column; }
+  .form-row button { width: 100%; }
+  .portrait-stamp { width: 76px; height: 76px; }
+  .portrait-stamp .zh-stamp { font-size: 17px; }
+  .portrait-stamp .est { font-size: 9px; }
+  .manifesto-label { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-dot"></span>
+    <span>Willa</span>
+    <span class="logo-sub">Chinese AI</span>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="zh">中文</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">
+      <span data-en="Coming Soon · Beta 2026" data-zh="即将上线 · 2026 公测">Coming Soon · Beta 2026</span>
+    </div>
+
+    <h1>
+      <span data-en="Speak real Chinese," data-zh="说地道的中文，">Speak real Chinese,</span><br>
+      <em data-en="not perfect Chinese." data-zh="而非完美的中文。">not perfect Chinese.</em>
+    </h1>
+
+    <p class="hero-lede" data-en="An AI tutor designed by a former Harvard Chinese instructor — built on a simple thesis: fluency comes from conversation, not grammar drills." data-zh="由前哈佛中文老师亲自设计的 AI 陪练，基于一个朴素的信念——流利的中文来自对话，而不是语法操练。">
+      An AI tutor designed by a former Harvard Chinese instructor — built on a simple thesis: fluency comes from conversation, not grammar drills.
+    </p>
+
+    <form class="waitlist-form" id="waitlist-form">
+      <div class="form-row">
+        <input
+          type="email"
+          id="email-input"
+          required
+          data-placeholder-en="your@email.com"
+          data-placeholder-zh="你的邮箱地址"
+          placeholder="your@email.com"
+          autocomplete="email"
+        />
+        <button type="submit" data-en="Join Waitlist" data-zh="加入等候名单">Join Waitlist</button>
+      </div>
+      <p class="form-note" data-en="Be among the first 100 beta users — no spam, ever." data-zh="成为前 100 位 beta 用户 — 绝无垃圾邮件。">
+        Be among the first 100 beta users — no spam, ever.
+      </p>
+    </form>
+
+    <div class="form-success" id="form-success">
+      <span data-en="✓ You're on the list. I'll write to you personally when Willa is ready." data-zh="✓ 你已加入名单。Willa 准备好的时候，我会亲自给你写信。">
+        ✓ You're on the list. I'll write to you personally when Willa is ready.
+      </span>
+    </div>
+  </div>
+
+  <div class="portrait-card">
+    <div class="portrait-frame">
+       <img src="willa-photo.jpeg" alt="Willa Wang, founder of Willa Chinese AI" /> 
+      <div class="portrait-stamp">
+        <span class="zh-stamp">老师</span>
+        <span class="est">EST. 2026</span>
+      </div>
+    </div>
+    <p class="portrait-caption">
+      <span class="arrow">↑</span>
+      <span data-en="that's me — your conversation partner" data-zh="这是我 — 你的语伴">that's me — your conversation partner</span>
+    </p>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="manifesto-grid">
+    <div class="manifesto-label" data-en="My philosophy" data-zh="我的理念">My philosophy</div>
+    <div>
+      <p class="manifesto-text" data-en="Most apps treat language learning like a near-perfect grammar test you have to ace. <strong>It isn't.</strong>" data-zh="大多数 app 把学语言当成一场要接近完美的语法考试。<strong>可它并不是。</strong>">
+        Most apps treat language learning like a near-perfect grammar test you have to ace. <strong>It isn't.</strong>
+      </p>
+
+      <p class="manifesto-text" data-en="Real, fluent language doesn't come from memorizing tones or sentence structures. It's built through <span class='pop'>thousands of imperfect conversations</span> — the kind that train your ear, build your instinct, and lock the language into muscle memory." data-zh="真正流利、地道的语言，不是靠记住声调或语法结构练出来的。它是靠<span class='pop'>几千次不完美的对话</span>练出来的——那些训练你的耳朵、建立语感、把语言刻进肌肉记忆的对话。">
+        Real, fluent language doesn't come from memorizing tones or sentence structures. It's built through <span class="pop">thousands of imperfect conversations</span> — the kind that train your ear, build your instinct, and lock the language into muscle memory.
+      </p>
+
+      <p class="manifesto-text" data-en="The problem? That kind of practice has always required a real human tutor. Expensive. Bound by schedules. And limited by one teacher's background and one teacher's range." data-zh="问题是：这种练习一直以来需要真人陪练。贵。受时间限制。还受限于老师的个人背景和水平。">
+        The problem? That kind of practice has always required a real human tutor. Expensive. Bound by schedules. And limited by one teacher's background and one teacher's range.
+      </p>
+
+      <p class="manifesto-text" data-en="<strong>AI changes the equation.</strong> A partner that meets you at your level, your goals, your interests — at 2 AM, on your morning commute, anywhere. Not to replace teachers, but to give you what no human teacher can: <span class='pop'>unlimited conversations.</span>" data-zh="<strong>AI 改变了这个等式。</strong>一个能配合你的水平、你的目标、你的兴趣的陪练——凌晨 2 点也能练，地铁上也能练。不是替代老师，而是给你老师给不了的东西：<span class='pop'>无限次的对话。</span>">
+        <strong>AI changes the equation.</strong> A partner that meets you at your level, your goals, your interests — at 2 AM, on your morning commute, anywhere. Not to replace teachers, but to give you what no human teacher can: <span class="pop">unlimited conversations.</span>
+      </p>
+
+      <p class="manifesto-text" data-en="That's what I'm focused on building." data-zh="这就是我在专注于做的事情。" style="margin-top: 36px;">
+        That's what I'm focused on building.
+      </p>
+
+      <div class="manifesto-signature">— Willa</div>
+      <div class="manifesto-signature-sub" data-en="Boston · 2026" data-zh="波士顿 · 2026">Boston · 2026</div>
+    </div>
+  </div>
+</section>
+
+<section class="credentials">
+  <div class="cred-label" data-en="A few things about me —" data-zh="关于我 —">A few things about me —</div>
+  <div class="cred-list">
+    <div class="cred-item">
+      <span data-en="Harvard University" data-zh="哈佛大学">Harvard University</span>
+      <span class="cred-detail" data-en="Chinese Language Instructor, 2020–2024" data-zh="中文教师 · 2020–2024">Chinese Language Instructor, 2020–2024</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="University of Notre Dame" data-zh="圣母大学">University of Notre Dame</span>
+      <span class="cred-detail" data-en="Chinese Faculty, 2012–2019" data-zh="中文教师 · 2012–2019">Chinese Faculty, 2012–2019</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="University of Iowa" data-zh="爱荷华大学">University of Iowa</span>
+      <span class="cred-detail" data-en="M.A. Teaching Chinese as a Foreign Language, 2010–2012" data-zh="对外汉语教学硕士 · 2010–2012">M.A. Teaching Chinese as a Foreign Language, 2010–2012</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="Boston University" data-zh="波士顿大学">Boston University</span>
+      <span class="cred-detail" data-en="M.S. Computer Science, 2025" data-zh="计算机科学硕士 · 2025">M.S. Computer Science, 2025</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="ACTFL Certified" data-zh="ACTFL 认证">ACTFL Certified</span>
+      <span class="cred-detail" data-en="Oral Proficiency Interview Tester" data-zh="口语水平面试考官">Oral Proficiency Interview Tester</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-left" data-en="© 2026 Willa Chinese AI · Boston" data-zh="© 2026 Willa Chinese AI · 波士顿">
+    © 2026 Willa Chinese AI · Boston
+  </div>
+  <div class="foot-right">
+    <a href="https://www.instagram.com/willachineseai" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.youtube.com/@WillaChineseAI" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/willachineseai" target="_blank" rel="noopener">X</a>
+    <a href="mailto:hi@willachinese.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+const langButtons = document.querySelectorAll('.lang-btn');
+const translatableElements = document.querySelectorAll('[data-en]');
+const emailInput = document.getElementById('email-input');
+
+function setLanguage(lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  translatableElements.forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if (text) el.innerHTML = text;
+  });
+  const placeholder = emailInput.getAttribute(`data-placeholder-${lang}`);
+  if (placeholder) emailInput.placeholder = placeholder;
+  langButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  try { localStorage.setItem('willa-lang', lang); } catch(e) {}
+}
+
+langButtons.forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+});
+
+try {
+  const saved = localStorage.getItem('willa-lang');
+  if (saved) setLanguage(saved);
+  else if (navigator.language && navigator.language.startsWith('zh')) setLanguage('zh');
+} catch(e) {}
+
+// IMPORTANT: Replace FORM_ENDPOINT with your ConvertKit / Formspree / Beehiiv endpoint
+const FORM_ENDPOINT = '';
+
+const form = document.getElementById('waitlist-form');
+const successBox = document.getElementById('form-success');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = emailInput.value.trim();
+  if (!email) return;
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = '...';
+  submitBtn.disabled = true;
+
+  try {
+    if (FORM_ENDPOINT) {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (!response.ok) throw new Error('submit failed');
+    }
+    form.style.display = 'none';
+    successBox.classList.add('show');
+  } catch (err) {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again or email hi@willachinese.com');
+  }
+});
+</script>
+
+</body>
+</html>
