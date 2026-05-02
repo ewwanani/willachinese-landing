@@ -653,15 +653,17 @@ footer {
     </form>
 
     <div class="form-success" id="form-success">
-      <span data-en="✓ You're on the list. I'll write to you personally when Willa is ready." data-zh="✓ 你已加入名单。Willa 准备好的时候，我会亲自给你写信。">
-        ✓ You're on the list. I'll write to you personally when Willa is ready.
+      <span data-en="✓ Almost there — check your inbox for a confirmation email. Once you confirm, you're officially on the list." data-zh="✓ 就差一步了 — 请查收你的邮箱，点击确认链接后即正式加入名单。">
+        ✓ Almost there — check your inbox for a confirmation email. Once you confirm, you're officially on the list.
       </span>
     </div>
   </div>
 
   <div class="portrait-card">
     <div class="portrait-frame">
-       <img src="willa-photo.jpeg" alt="Willa Wang, founder of Willa Chinese AI" /> 
+      <!-- 把下面这行换成你的真人职业照 URL -->
+      <!-- <img src="willa-photo.jpg" alt="Willa Wang, founder of Willa Chinese AI" /> -->
+      <div class="portrait-placeholder"></div>
       <div class="portrait-stamp">
         <span class="zh-stamp">老师</span>
         <span class="est">EST. 2026</span>
@@ -686,8 +688,8 @@ footer {
         Real, fluent language doesn't come from memorizing tones or sentence structures. It's built through <span class="pop">thousands of imperfect conversations</span> — the kind that train your ear, build your instinct, and lock the language into muscle memory.
       </p>
 
-      <p class="manifesto-text" data-en="The problem? That kind of practice has always required a real human tutor. Expensive. Bound by schedules. And limited by one teacher's background and one teacher's range." data-zh="问题是：这种练习一直以来需要真人陪练。贵。受时间限制。还受限于老师的个人背景和水平。">
-        The problem? That kind of practice has always required a real human tutor. Expensive. Bound by schedules. And limited by one teacher's background and one teacher's range.
+      <p class="manifesto-text" data-en="The problem? That kind of practice has always required a real human tutor — expensive, bound by time and place, and limited by one teacher's background and range." data-zh="问题是：这种练习一直以来需要真人陪练，成本高，不仅受时间地点限制，还受限于老师的个人背景和水平。">
+        The problem? That kind of practice has always required a real human tutor — expensive, bound by time and place, and limited by one teacher's background and range.
       </p>
 
       <p class="manifesto-text" data-en="<strong>AI changes the equation.</strong> A partner that meets you at your level, your goals, your interests — at 2 AM, on your morning commute, anywhere. Not to replace teachers, but to give you what no human teacher can: <span class='pop'>unlimited conversations.</span>" data-zh="<strong>AI 改变了这个等式。</strong>一个能配合你的水平、你的目标、你的兴趣的陪练——凌晨 2 点也能练，地铁上也能练。不是替代老师，而是给你老师给不了的东西：<span class='pop'>无限次的对话。</span>">
@@ -771,8 +773,11 @@ try {
   else if (navigator.language && navigator.language.startsWith('zh')) setLanguage('zh');
 } catch(e) {}
 
-// IMPORTANT: Replace FORM_ENDPOINT with your ConvertKit / Formspree / Beehiiv endpoint
-const FORM_ENDPOINT = '';
+// Kit (formerly ConvertKit) form subscribe endpoint.
+// The API key below is the PUBLIC key — safe to expose in client code.
+// It can only subscribe emails to this form; it cannot read or send.
+const FORM_ENDPOINT = 'https://api.convertkit.com/v3/forms/9393916/subscribe';
+const KIT_API_KEY = '6yDZKE2ZHeEq8FRgrzlOQQ';
 
 const form = document.getElementById('waitlist-form');
 const successBox = document.getElementById('form-success');
@@ -791,8 +796,8 @@ form.addEventListener('submit', async (e) => {
     if (FORM_ENDPOINT) {
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email })
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify({ api_key: KIT_API_KEY, email })
       });
       if (!response.ok) throw new Error('submit failed');
     }
