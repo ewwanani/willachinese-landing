@@ -347,10 +347,12 @@ h1 em {
 
 .portrait-stamp {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 104px;
-  height: 104px;
+  top: -18px;
+  right: -18px;
+  width: 96px;
+  height: 96px;
+  padding: 18px 18px 0 0;
+  box-sizing: border-box;
   background: var(--accent);
   color: var(--paper);
   border-radius: 50%;
@@ -370,7 +372,6 @@ h1 em {
   font-weight: 600;
   font-size: 14px;
   padding: 0 8px;
-  margin-bottom: 3px;
   letter-spacing: 0.05em;
 }
 
@@ -603,7 +604,7 @@ html[lang="zh-CN"] h1 { font-size: clamp(36px, 4.6vw, 62px); line-height: 1.2; }
   .form-row { flex-direction: column; }
   .form-row button { width: 100%; }
   .portrait-stamp { width: 76px; height: 76px; }
-  .portrait-stamp .zh-stamp { font-size: 17px; }
+  .portrait-stamp .zh-stamp { font-size: 12px; }
   .portrait-stamp .est { font-size: 9px; }
   .manifesto-label { font-size: 16px; }
 }
@@ -668,8 +669,7 @@ html[lang="zh-CN"] h1 { font-size: clamp(36px, 4.6vw, 62px); line-height: 1.2; }
       <img src="willa-photo.jpeg" alt="Willa Wang, founder of Willa Chinese" />
       <div class="portrait-placeholder"></div>
       <div class="portrait-stamp">
-        <span class="zh-stamp" data-en="Willa Laoshi" data-zh="Willa老师">Willa Laoshi</span>
-        <span class="est">EST. 2026</span>
+        <span class="zh-stamp" data-en="Willa<br>Laoshi" data-zh="Willa<br>老师">Willa<br>Laoshi</span>
       </div>
     </div>
     <p class="portrait-caption">
@@ -683,8 +683,8 @@ html[lang="zh-CN"] h1 { font-size: clamp(36px, 4.6vw, 62px); line-height: 1.2; }
   <div class="manifesto-grid">
     <div class="manifesto-label" data-en="Why Willa Chinese" data-zh="为什么做 Willa Chinese">Why Willa Chinese</div>
     <div>
-      <p class="manifesto-text" data-en="At a classmate's birthday party, I said hello to another Chinese-heritage parent and asked, “Can I speak Chinese with you?” He smiled, a little embarrassed: <strong>“I can understand you, but I can't speak.”</strong>" data-zh="在孩子同学的生日派对上，我和一位华裔家长打招呼，问他：“可以跟你说中文吗？”他礼貌又有点尴尬地笑了笑：<strong>“I can understand you, but I can't speak.”</strong>">
-        At a classmate's birthday party, I said hello to another Chinese-heritage parent and asked, “Can I speak Chinese with you?” He smiled, a little embarrassed: <strong>“I can understand you, but I can't speak.”</strong>
+      <p class="manifesto-text" data-en="At my child's classmate's birthday party, I said hello to another Chinese-heritage parent and asked, “Can I speak Chinese with you?” He smiled, a little embarrassed: <strong>“I can understand you, but I can't speak.”</strong>" data-zh="在孩子同学的生日派对上，我和一位华裔家长打招呼，问他：“可以跟你说中文吗？”他礼貌又有点尴尬地笑了笑：<strong>“I can understand you, but I can't speak.”</strong>">
+        At my child's classmate's birthday party, I said hello to another Chinese-heritage parent and asked, “Can I speak Chinese with you?” He smiled, a little embarrassed: <strong>“I can understand you, but I can't speak.”</strong>
       </p>
 
       <p class="manifesto-text" data-en="I've heard that sentence for years — from the college students I taught, from kids in my weekend class. Growing up here, English slowly takes Chinese's place. Not because kids don't understand, but because <span class='pop'>they rarely get the chance to speak.</span>" data-zh="这句话我听了很多年——从我教过的华裔大学生，到周末中文学校的孩子们。在这里长大，英文会慢慢取代中文。不是孩子听不懂，而是<span class='pop'>开口说的机会太少。</span>">
