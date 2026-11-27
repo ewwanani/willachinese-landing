@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Willa Chinese AI — Speak Real Chinese, Not Perfect Chinese</title>
-<meta name="description" content="An AI Chinese tutor designed by a former Harvard Chinese instructor. Built on a simple thesis: fluency comes from conversation, not grammar drills. Join the waitlist." />
+<title>Willa Chinese — A Chinese companion made for every child</title>
+<meta name="description" content="A personal Chinese story companion for Chinese-heritage kids 4–12: it tells stories in Chinese, waits for your child to answer, and remembers what they said. Designed by a former Harvard Chinese instructor." />
 
-<meta property="og:title" content="Willa Chinese AI — Speak Real Chinese, Not Perfect Chinese" />
-<meta property="og:description" content="Built by a former Harvard Chinese instructor. Fluency comes from conversation, not grammar drills." />
+<meta property="og:title" content="Willa Chinese — 给每个孩子一个量身定做的中文语伴" />
+<meta property="og:description" content="A Chinese story companion for heritage kids who understand Chinese but answer in English." />
 <meta property="og:url" content="https://willachinese.com" />
 <meta property="og:type" content="website" />
 
@@ -347,10 +347,10 @@ h1 em {
 
 .portrait-stamp {
   position: absolute;
-  top: -18px;
-  right: -18px;
-  width: 96px;
-  height: 96px;
+  top: 12px;
+  right: 12px;
+  width: 104px;
+  height: 104px;
   background: var(--accent);
   color: var(--paper);
   border-radius: 50%;
@@ -368,7 +368,8 @@ h1 em {
 .portrait-stamp .zh-stamp {
   font-family: 'Noto Serif SC', serif;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 14px;
+  padding: 0 8px;
   margin-bottom: 3px;
   letter-spacing: 0.05em;
 }
@@ -572,6 +573,8 @@ footer {
   text-underline-offset: 4px;
 }
 
+html[lang="zh-CN"] h1 { font-size: clamp(36px, 4.6vw, 62px); line-height: 1.2; }
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
@@ -612,7 +615,7 @@ footer {
   <div class="logo">
     <span class="logo-dot"></span>
     <span>Willa</span>
-    <span class="logo-sub">Chinese AI</span>
+    <span class="logo-sub">Chinese</span>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" data-lang="en">EN</button>
@@ -623,16 +626,16 @@ footer {
 <section class="hero">
   <div class="hero-content">
     <div class="eyebrow">
-      <span data-en="Coming Soon · Beta 2026" data-zh="即将上线 · 2026 公测">Coming Soon · Beta 2026</span>
+      <span data-en="For Chinese-heritage kids 4–12 · Family beta 2027" data-zh="为 4–12 岁华裔孩子而做 · 2027 家庭内测">For Chinese-heritage kids 4–12 · Family beta 2027</span>
     </div>
 
     <h1>
-      <span data-en="Speak real Chinese," data-zh="说地道的中文，">Speak real Chinese,</span><br>
-      <em data-en="not perfect Chinese." data-zh="而非完美的中文。">not perfect Chinese.</em>
+      <span data-en="A Chinese companion," data-zh="给每个孩子一个">A Chinese companion,</span><br>
+      <em data-en="made for every child." data-zh="量身定做的中文语伴">made for every child.</em>
     </h1>
 
-    <p class="hero-lede" data-en="An AI tutor designed by a former Harvard Chinese instructor — built on a simple thesis: fluency comes from conversation, not grammar drills." data-zh="由前哈佛中文老师亲自设计的 AI 陪练，基于一个朴素的信念——流利的中文来自对话，而不是语法操练。">
-      An AI tutor designed by a former Harvard Chinese instructor — built on a simple thesis: fluency comes from conversation, not grammar drills.
+    <p class="hero-lede" data-en="Listen to stories, talk with the companion, and pick up new words and grammar along the way. We want to give Chinese-heritage kids who understand Chinese but answer in English many more chances to speak." data-zh="听语伴讲故事，跟语伴对话，跟语伴学生词、学语法。我们希望给听得懂中文、却总用英文回答问题的华裔孩子，更多开口说话的机会。">
+      Listen to stories, talk with the companion, and pick up new words and grammar along the way. We want to give Chinese-heritage kids who understand Chinese but answer in English many more chances to speak.
     </p>
 
     <form class="waitlist-form" id="waitlist-form">
@@ -648,8 +651,8 @@ footer {
         />
         <button type="submit" data-en="Join Waitlist" data-zh="加入等候名单">Join Waitlist</button>
       </div>
-      <p class="form-note" data-en="Be among the first 100 beta users — no spam, ever." data-zh="成为前 100 位 beta 用户 — 绝无垃圾邮件。">
-        Be among the first 100 beta users — no spam, ever.
+      <p class="form-note" data-en="Join the waitlist for our family beta — no spam, ever." data-zh="加入等候名单，参加家庭内测 — 绝无垃圾邮件。">
+        Join the waitlist for our family beta — no spam, ever.
       </p>
     </form>
 
@@ -662,51 +665,73 @@ footer {
 
   <div class="portrait-card">
     <div class="portrait-frame">
-      <img src="willa-photo.jpeg" alt="Willa Wang, founder of Willa Chinese AI" />
+      <img src="willa-photo.jpeg" alt="Willa Wang, founder of Willa Chinese" />
       <div class="portrait-placeholder"></div>
       <div class="portrait-stamp">
-        <span class="zh-stamp">老师</span>
+        <span class="zh-stamp" data-en="Willa Laoshi" data-zh="Willa老师">Willa Laoshi</span>
         <span class="est">EST. 2026</span>
       </div>
     </div>
     <p class="portrait-caption">
       <span class="arrow">↑</span>
-      <span data-en="that's me — your conversation partner" data-zh="这是我 — 你的语伴">that's me — your conversation partner</span>
+      <span data-en="that's me — Willa Laoshi, who designs the stories and the teaching" data-zh="这是我 — Willa 老师，故事和教学由我设计">that's me — Willa Laoshi, who designs the stories and the teaching</span>
     </p>
   </div>
 </section>
 
 <section class="manifesto">
   <div class="manifesto-grid">
-    <div class="manifesto-label" data-en="My philosophy" data-zh="我的理念">My philosophy</div>
+    <div class="manifesto-label" data-en="Why Willa Chinese" data-zh="为什么做 Willa Chinese">Why Willa Chinese</div>
     <div>
-      <p class="manifesto-text" data-en="Most apps treat language learning like a near-perfect grammar test you have to ace. <strong>It isn't.</strong>" data-zh="大多数 app 把学语言当成一场要接近完美的语法考试。<strong>可它并不是。</strong>">
-        Most apps treat language learning like a near-perfect grammar test you have to ace. <strong>It isn't.</strong>
+      <p class="manifesto-text" data-en="At a classmate's birthday party, I said hello to another Chinese-heritage parent and asked, “Can I speak Chinese with you?” He smiled, a little embarrassed: <strong>“I can understand you, but I can't speak.”</strong>" data-zh="在孩子同学的生日派对上，我和一位华裔家长打招呼，问他：“可以跟你说中文吗？”他礼貌又有点尴尬地笑了笑：<strong>“I can understand you, but I can't speak.”</strong>">
+        At a classmate's birthday party, I said hello to another Chinese-heritage parent and asked, “Can I speak Chinese with you?” He smiled, a little embarrassed: <strong>“I can understand you, but I can't speak.”</strong>
       </p>
 
-      <p class="manifesto-text" data-en="Real, fluent language doesn't come from memorizing tones or sentence structures. It's built through <span class='pop'>thousands of imperfect conversations</span> — the kind that train your ear, build your instinct, and lock the language into muscle memory." data-zh="真正流利、地道的语言，不是靠记住声调或语法结构练出来的。它是靠<span class='pop'>几千次不完美的对话</span>练出来的——那些训练你的耳朵、建立语感、把语言刻进肌肉记忆的对话。">
-        Real, fluent language doesn't come from memorizing tones or sentence structures. It's built through <span class="pop">thousands of imperfect conversations</span> — the kind that train your ear, build your instinct, and lock the language into muscle memory.
+      <p class="manifesto-text" data-en="I've heard that sentence for years — from the college students I taught, from kids in my weekend class. Growing up here, English slowly takes Chinese's place. Not because kids don't understand, but because <span class='pop'>they rarely get the chance to speak.</span>" data-zh="这句话我听了很多年——从我教过的华裔大学生，到周末中文学校的孩子们。在这里长大，英文会慢慢取代中文。不是孩子听不懂，而是<span class='pop'>开口说的机会太少。</span>">
+        I've heard that sentence for years — from the college students I taught, from kids in my weekend class. Growing up here, English slowly takes Chinese's place. Not because kids don't understand, but because <span class="pop">they rarely get the chance to speak.</span>
       </p>
 
-      <p class="manifesto-text" data-en="The problem? That kind of practice has always required a real human tutor — expensive, bound by time and place, and limited by one teacher's background and range." data-zh="问题是：这种练习一直以来需要真人陪练，成本高，不仅受时间地点限制，还受限于老师的个人背景和水平。">
-        The problem? That kind of practice has always required a real human tutor — expensive, bound by time and place, and limited by one teacher's background and range.
+      <p class="manifesto-text" data-en="A Chinese-speaking home is a rare gift: a hard, valuable language within easy reach, and a door to understanding where your family comes from. But a weekly class is short, and after class, kids rarely get real chances to speak and say something meaningful in Chinese." data-zh="家里有人说中文，是孩子得天独厚的优势：一门难学又越来越重要的语言就在身边，也是一扇了解父母、了解自己从哪里来的门。可是一周一次的中文课太短，下课后，孩子真正开口说、有质量输出的机会少之又少。">
+        A Chinese-speaking home is a rare gift: a hard, valuable language within easy reach, and a door to understanding where your family comes from. But a weekly class is short, and after class, kids rarely get real chances to speak and say something meaningful in Chinese.
       </p>
 
-      <p class="manifesto-text" data-en="<strong>AI changes the equation.</strong> A partner that meets you at your level, your goals, your interests — at 2 AM, on your morning commute, anywhere. Not to replace teachers, but to give you what no human teacher can: <span class='pop'>unlimited conversations.</span>" data-zh="<strong>AI 改变了这个等式。</strong>一个能配合你的水平、你的目标、你的兴趣的陪练——凌晨 2 点也能练，地铁上也能练。不是替代老师，而是给你老师给不了的东西：<span class='pop'>无限次的对话。</span>">
-        <strong>AI changes the equation.</strong> A partner that meets you at your level, your goals, your interests — at 2 AM, on your morning commute, anywhere. Not to replace teachers, but to give you what no human teacher can: <span class="pop">unlimited conversations.</span>
+      <p class="manifesto-text" data-en="I first wanted to write a textbook for heritage kids. Then AI arrived, and I moved into tech. Now I can give children more than a book: <strong>a Chinese companion of their very own, there for them any time, day or night.</strong> It knows their background and interests, knows their Chinese level, tells stories vividly, and patiently answers any question." data-zh="我最初只想写一本专门给华裔孩子的教材。后来 AI 出现了，我也投身科技领域。现在我能为孩子们做的不仅仅是一本书，而是<strong>给每个孩子一个属于他们自己的、能 24 小时陪伴他们的中文语伴</strong>。这个语伴了解孩子的背景和喜好，知道他们的中文水平，既能绘声绘色地讲故事，又能耐心回答任何问题。">
+        I first wanted to write a textbook for heritage kids. Then AI arrived, and I moved into tech. Now I can give children more than a book: <strong>a Chinese companion of their very own, there for them any time, day or night.</strong> It knows their background and interests, knows their Chinese level, tells stories vividly, and patiently answers any question.
       </p>
 
-      <p class="manifesto-text" data-en="That's what I'm focused on building." data-zh="这就是我在专注于做的事情。" style="margin-top: 36px;">
-        That's what I'm focused on building.
+      <p class="manifesto-text" data-en="Not to replace teachers or parents — but to carry speaking practice beyond class time for teachers, to talk with kids when parents are busy, and above all to help children keep their Chinese: <span class='pop'>to discover the beauty of Chinese in conversation, and the richness of the culture in stories.</span>" data-zh="不是替代老师和父母，而是帮老师完成课下时间的中文口语训练，帮父母在繁忙的时候陪孩子说话，更是让孩子保持住自己的中文水平，<span class='pop'>在对话中领略中文的美，在故事中感受文化的魅力。</span>" style="margin-top: 36px;">
+        Not to replace teachers or parents — but to carry speaking practice beyond class time for teachers, to talk with kids when parents are busy, and above all to help children keep their Chinese: <span class="pop">to discover the beauty of Chinese in conversation, and the richness of the culture in stories.</span>
       </p>
 
-      <div class="manifesto-signature">— Willa</div>
-      <div class="manifesto-signature-sub" data-en="Boston · 2026" data-zh="波士顿 · 2026">Boston · 2026</div>
+      <div class="manifesto-signature" data-en="— Willa Laoshi" data-zh="— Willa 老师">— Willa Laoshi</div>
+      <div class="manifesto-signature-sub" data-en="2026" data-zh="2026">2026</div>
     </div>
   </div>
 </section>
 
 <section class="credentials">
+  <div class="cred-label" data-en="How the companion works —" data-zh="语伴怎么陪孩子说中文 —">How the companion works —</div>
+  <div class="cred-list">
+    <div class="cred-item">
+      <span data-en="Speak to continue" data-zh="开口说，故事才继续">Speak to continue</span>
+      <span class="cred-detail" data-en="The story pauses at key moments and waits for your child to answer in Chinese." data-zh="故事讲到关键处停下来，等孩子用中文回答。">The story pauses at key moments and waits for your child to answer in Chinese.</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="Chinese only" data-zh="只说中文，不切英文">Chinese only</span>
+      <span class="cred-detail" data-en="When your child slips into English, it gives the Chinese word and uses it back." data-zh="孩子说出英文词，语伴就告诉他中文怎么说，再用回去。">When your child slips into English, it gives the Chinese word and uses it back.</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="Knows your child" data-zh="懂你的孩子">Knows your child</span>
+      <span class="cred-detail" data-en="Remembers their name, what they said, and the words they're learning." data-zh="记得孩子的名字、说过的话、正在学的词。">Remembers their name, what they said, and the words they're learning.</span>
+    </div>
+    <div class="cred-item">
+      <span data-en="Safe and private" data-zh="安全，只留在家里">Safe and private</span>
+      <span class="cred-detail" data-en="Tells kids it's AI. Parents own the account. Nothing is shared publicly." data-zh="一开始就告诉孩子自己是 AI；账号归家长；不公开分享任何内容。">Tells kids it's AI. Parents own the account. Nothing is shared publicly.</span>
+    </div>
+  </div>
+</section>
+
+<section class="credentials" style="border-top: none;">
   <div class="cred-label" data-en="A few things about me —" data-zh="关于我 —">A few things about me —</div>
   <div class="cred-list">
     <div class="cred-item">
@@ -729,8 +754,8 @@ footer {
 </section>
 
 <footer>
-  <div class="foot-left" data-en="© 2026 Willa Chinese AI · Boston" data-zh="© 2026 Willa Chinese AI · 波士顿">
-    © 2026 Willa Chinese AI · Boston
+  <div class="foot-left" data-en="© 2026 Willa Chinese" data-zh="© 2026 Willa Chinese">
+    © 2026 Willa Chinese
   </div>
   <div class="foot-right">
     <a href="https://www.instagram.com/willachineseai" target="_blank" rel="noopener">Instagram</a>
